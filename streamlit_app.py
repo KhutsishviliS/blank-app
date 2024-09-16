@@ -9,6 +9,7 @@ from streamlit_option_menu import option_menu
 
 
 st.title(":blue[AI FASHION MNIST Classification]",anchor=False)
+st.markdown("[link](main.py")
 st.markdown("# ტანსაცმლის კლასიფიკაცია ")
 st.markdown("""მოგესალმებით მეგობრებო ეს არის ჩემი პირველი ოფიციალური პროექტი *ტანსაცმლის კლასიფიკაცია* ხელოვნური ინტელექტის დახმარებით
 ეს პროექტი შექმნილია [Python](https://www.python.org/)-ს და [TensorFlow](https://www.tensorflow.org)-ს გამოყენებით """)
