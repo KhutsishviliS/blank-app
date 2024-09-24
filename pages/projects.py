@@ -26,12 +26,16 @@ st.markdown("""
 თუ გსურთ რო გამოიყენოთ საკუთარი კომპიუტერი/ლეპტოპი მაშნ პირველ რიგში საჭიროა დაინსტალირებული გქონდეთ თქვენს IDE-ში შემდგომი მოდულები:
 </span>
 """, unsafe_allow_html=True)
+import streamlit as st
+
 st.markdown("""
-            1. **tensorflow**
-            2. **numpy**
-            3. **pandas**
-            4. **matplotlib**
-            """)
+            
+    <p style="color: #3A485F;">1. <b>tensorflow</b></p>
+    <p style="color: #3A485F;">2. <b>numpy</b></p>
+    <p style="color: #3A485F;">3. <b>pandas</b></p>
+    <p style="color: #3A485F;">4. <b>matplotlib</b></p>
+    """, unsafe_allow_html=True)
+
 st.info("ℹ️ იმ შემთხვევაში თუ იყენებთ Google Colab-ს, ეს მოდულები უკვე დაინსტალირებულია და თქვენ მხოლოდ მისი იმპორტირება დაგჭირდებათ.")
 st.code("""
         pip install tensorflow
@@ -58,7 +62,7 @@ st.code("""
         import matplotlib.pyplot as plt
 """,language="python")
 
-st.markdown("TensorFlow-ს პაკეტს მოყვება ფოტო მონაცემები **fashion_mnist** და ამ მონაცემებს გამოვიყენებთ ჩვენი ხელოვნური ინტელექტის სავარჯიშოდ. ")
+st.markdown('<blockquote style="color:#3A485F;">TensorFlow-ს პაკეტს მოყვება ფოტო მონაცემები **fashion_mnist** და ამ მონაცემებს გამოვიყენებთ ჩვენი ხელოვნური ინტელექტის სავარჯიშოდ.</blockquote> ', unsafe_allow_html=True)
 st.code("""
         # fashion_mnist მონაცემთა იმპორტირება
         fashion_mnist= tf.keras.datasets.fashion_mnist 
@@ -88,7 +92,7 @@ st.code("""
             plt.title(class_names[train_labels[random_index]])
             plt.imshow(train_images[random_index],cmap=plt.cm.binary)
 """,language="python")
-st.markdown("> ფოტო მონაცემის მაგალითი:")
+st.markdown("<p style='color:#3A485F;' ფოტო მონაცემის მაგალითი:</p>", unsafe_allow_html=True)
 fashion_mnist= tf.keras.datasets.fashion_mnist
 (train_images,train_labels),(test_images,test_labels) = fashion_mnist.load_data()
 
@@ -147,20 +151,26 @@ st.markdown("---")
 
 
 
-st.markdown(""" *იმისათვის რომ ჩვენმა მოდელმა რაც შეიძლება მაქსიმალური შედეგი აჩვენოს, მოდით გადავიყვანოთ train_labels და test_labels მონაცემები კოდირების ფორმატში რომელსაც
-**one_hot_encoding** ეწოდება. ეს არის მონაცემთა კოდირების მეთოდი რომელიც ძალიან ხშირად გამოიყენება კატეგორიული მონაცემების დასამუშავებლად*
+st.markdown('''
+<p style="color:#3A485F;">
+    <i>იმისათვის რომ ჩვენმა მოდელმა რაც შეიძლება მაქსიმალური შედეგი აჩვენოს, მოდით გადავიყვანოთ train_labels და test_labels მონაცემები კოდირების ფორმატში რომელსაც 
+    <b>one_hot_encoding</b> ეწოდება. ეს არის მონაცემთა კოდირების მეთოდი რომელიც ძალიან ხშირად გამოიყენება კატეგორიული მონაცემების დასამუშავებლად.</i>
+    <br>ვრცლად :
+<a href="https://en.wikipedia.org/wiki/One-hot" target="_blank">Wikipedia</a>, 
+<a href="https://www.tensorflow.org/api_docs/python/tf/one_hot" target="_blank">TensorFlow</a>
+</p>  
 
-ვრცლად :  [Wikipedia](https://en.wikipedia.org/wiki/One-hot), [TensorFlow](https://www.tensorflow.org/api_docs/python/tf/one_hot)""")
-
+''', unsafe_allow_html=True)
 st.code("""
         train_labels_one_hot = tf.one_hot(train_labels,depth=10)
         test_labels_one_hot = tf.one_hot(test_labels,depth=10)
 """)
 
-st.markdown("#### შევქმნათ მოდელის არქიტექტურა:")
-st.markdown("> მე ამ პროცესს შემოკლებით CCF პროცესს ვუწოდებ (Create, Compile, Fit)")
+# Custom color and heading for "შევქმნათ მოდელის არქიტექტურა"
+st.markdown('<h4 style="color:#3A485F;">შევქმნათ მოდელის არქიტექტურა:</h4>', unsafe_allow_html=True)
 
-
+# Custom color for the quote text
+st.markdown('<blockquote style="color:#3A485F;">მე ამ პროცესს შემოკლებით CCF პროცესს ვუწოდებ (Create, Compile, Fit)</blockquote>', unsafe_allow_html=True)
 st.code("""
         # Create The Model
 
@@ -193,7 +203,7 @@ st.code("""
         # მონაცემთა ვიზუალიზაცია
         pd.DataFrame(history.history).plot()
 """)
-st.write("ეს არის ჩვენი პირველი მოდელი. მოდითახლა ვნახოთ თუ რამდენად კარი მოდელია და რამდენად სწორად ისწავლა ტანსაცმლის განსხვავება")
+st.markdown('<p style="color:#3A485F;">ეს არის ჩვენი პირველი მოდელი. მოდით ახლა ვნახოთ თუ რამდენად კარგი მოდელია და რამდენად სწორად ისწავლა ტანსაცმლის განსხვავება.</p>', unsafe_allow_html=True)
 st.code("""
         
         model_prediction = model.predict(test_images_norm)
