@@ -41,7 +41,7 @@ st.markdown("""
     <strong style='color:#3A485F;'>ℹ️ იმ შემთხვევაში თუ იყენებთ Google Colab-ს, ეს მოდულები უკვე დაინსტალირებულია და თქვენ მხოლოდ მისი იმპორტირება დაგჭირდებათ.</strong>
 </div>
 """, unsafe_allow_html=True)
-
+st.write("")
 st.code("""
         pip install tensorflow
         pip install numpy
