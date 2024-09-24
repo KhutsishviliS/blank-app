@@ -5,31 +5,45 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random
 from streamlit_option_menu import option_menu
+import base64
+
+def get_img_as_base64(file):
+    with open(file, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+# Set up the background image in Streamlit page design
 def page_design():
-    page_bg_img ="""
+    img_base64 = get_img_as_base64("images/magicpattern1.png")
+    page_bg_img = f"""
     <style>
-    [class="main st-emotion-cache-bm2z3a ea3mdgi8"]
-    {background-color: #274f69;
+    .main {{
+        background-color: #274f69;
         opacity: 1;
-        background-image:  linear-gradient(30deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(150deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(30deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(150deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(60deg, #c6c6c677 25%, transparent 25.5%, transparent 75%, #c6c6c677 75%, #c6c6c677), linear-gradient(60deg, #c6c6c677 25%, transparent 25.5%, transparent 75%, #c6c6c677 75%, #c6c6c677);
-        background-size: 56px 98px;
+        background-image: url("data:image/png;base64,{img_base64}");
+        background-size: 1200px 1000px;
+        background-repeat:no-repeat;
         background-position: 0 0, 0 0, 28px 49px, 28px 49px, 0 0, 28px 49px;
-    }
-    [data-testid="stAppViewBlockContainer"]{
-    background-color: #FFF
-    }
+    }}
+    [data-testid="stVerticalBlock"] {{
+        background-color: white;
+    }}
+    [data-testid="stAppViewBlockContainer"]{{
+        
+        background-color: white;
 
-    [data-testid="stHeader"]{
-    background-color: #FE6F00
-    }
-    [data-testid="stSidebarContent"]{
-    background-color: white
-    }
+    }}
+    
+    [data-testid="stHeader"] {{
+        background-color: #FE6F00;
+    }}
+    [data-testid="stSidebarContent"] {{
+        background-color: white;
+    }}
     </style>
-
-
     """
-    st.markdown(page_bg_img,unsafe_allow_html=True)
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
 
 page_design()
 ###############################################

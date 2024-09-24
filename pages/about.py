@@ -12,3 +12,4 @@ st.markdown("""
 * გავაღვივო ინტერესი და ცნობისმოყვარეობა AI-ის მიმართ
 
 """)
+st.page_link("streamlit_app.py",label="Home")
