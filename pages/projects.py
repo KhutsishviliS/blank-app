@@ -5,7 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random
 from streamlit_option_menu import option_menu
-from streamlit_app import page_design
+from streamlit_app import page_design, get_img_as_base64
+get_img_as_base64()
 page_design()
 
 

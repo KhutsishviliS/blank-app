@@ -1,5 +1,6 @@
 import streamlit as st
-from streamlit_app import page_design
+from streamlit_app import page_design, get_img_as_base64
+get_img_as_base64()
 page_design()
 st.title("გამარჯობა")
 st.markdown("""
