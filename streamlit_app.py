@@ -67,7 +67,7 @@ main_page = st.Page(
     default= True
 )
 # ----------- NAVIGATION ----------- #
-pg = st.navigation(pages=[main_page, project,contact_page,about])
+
 #
 
 # Function to display a card with image and text
@@ -100,7 +100,7 @@ link_text = "Learn More"
 # Call the display_card function
 display_card(image_url, title, description, page_name, link_text)
 
-
+pg = st.navigation(pages=[main_page, project,contact_page,about])
 pg.run()
 
 
