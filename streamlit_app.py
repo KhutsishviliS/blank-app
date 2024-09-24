@@ -33,7 +33,6 @@ def page_design():
         background-color: white;
 
     }}
-    
     [data-testid="stHeader"] {{
         background-color: #FE6F00;
     }}
