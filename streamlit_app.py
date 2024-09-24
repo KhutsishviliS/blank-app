@@ -19,11 +19,7 @@ def page_design():
     <style>
     .main {{
         background-color: #274f69;
-        opacity: 1;
-        background-image: url("data:image/png;base64,{img_base64}");
-        background-size: 1200px 1000px;
-        background-repeat:no-repeat;
-        background-position: 0 0, 0 0, 28px 49px, 28px 49px, 0 0, 28px 49px;
+        
     }}
     [data-testid="stVerticalBlock"] {{
         background-color: white;
