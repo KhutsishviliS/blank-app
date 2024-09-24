@@ -68,10 +68,9 @@ main_page = st.Page(
 )
 # ----------- NAVIGATION ----------- #
 
-#
 
 # Function to display a card with image and text
-def display_card(image_url, title, description, page_name, link_text):
+def display_card(image_url, title1, description, page_name, link_text):
     # Create two columns for the image and text
     col1, col2 = st.columns([1, 2])  # Adjust the ratio to control the space distribution
 
@@ -81,12 +80,13 @@ def display_card(image_url, title, description, page_name, link_text):
 
     # Column 2: Display text information
     with col2:
-        st.markdown(f"### {title}")  # Title in a larger font size
+        mTitle = title1
+        st.markdown(f"### {mTitle}")  # Title in a larger font size
         st.write(description)  # Main description or information text
-        if st.button(link_text, key=f"btn_{title}"):
+        if st.button(link_text, key=f"btn_{title1}"):
             st.switch_page(page_name)
 
-st.markdown("## AI Fashion MNIST Cards")  # Page title
+#st.markdown("## AI Fashion MNIST Cards")  # Page title
 
 # Example usage of the card
 image_url = "images/tfcube.webp"  # Replace with your actual image URL
@@ -94,14 +94,13 @@ title = "AI Fashion MNIST"
 description = "A model that classifies fashion items using AI. Explore the dataset and learn more."
 page_name = "pages/projects.py"  # This should match the filename of your projects page
 link_text = "Learn More"
-#pname= "pages/about.py"
-#ttle= "MMN"
+pname= "pages/about.py"
+ttle= "About"
+description_about ="About me"
 
 # Call the display_card function
-display_card(image_url, title, description, page_name, link_text)
+display_card(image_url, title1=title,description= description,page_name= page_name,link_text= link_text)
+#display_card(image_url,ttle,description_about,pname,link_text,button_text=link_text)
 
-pg = st.navigation(pages=[main_page, project,contact_page,about])
-pg.run()
-
-
-
+#pg = st.navigation(pages=[main_page, project,contact_page,about])
+#pg.run()
