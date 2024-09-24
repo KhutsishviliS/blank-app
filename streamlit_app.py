@@ -103,4 +103,4 @@ display_card(image_url, title1=title,description= description,page_name= page_na
 #display_card(image_url,ttle,description_about,pname,link_text,button_text=link_text)
 
 pg = st.navigation(pages=[main_page, project,contact_page,about])
-#pg.run()
+pg.run()
