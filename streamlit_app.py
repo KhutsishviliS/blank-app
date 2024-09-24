@@ -102,5 +102,5 @@ description_about ="About me"
 display_card(image_url, title1=title,description= description,page_name= page_name,link_text= link_text)
 #display_card(image_url,ttle,description_about,pname,link_text,button_text=link_text)
 
-#pg = st.navigation(pages=[main_page, project,contact_page,about])
+pg = st.navigation(pages=[main_page, project,contact_page,about])
 #pg.run()
