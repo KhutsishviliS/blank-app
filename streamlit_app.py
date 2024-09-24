@@ -61,7 +61,7 @@ contact_page = st.Page(
     icon="✉️"
 )
 main_page = st.Page(
-    page="streamlit_app.py",
+    page="pages/main.py",
     title="Main Page",
     icon="🤖",
     default= True
@@ -70,37 +70,10 @@ main_page = st.Page(
 pg = st.navigation(pages=[main_page, project,contact_page,about])
 
 # Function to display a card with image and text
-def display_card(image_url, title1, description, page_name, link_text):
-    # Create two columns for the image and text
-    col1, col2 = st.columns([1, 2])  # Adjust the ratio to control the space distribution
-
-    # Column 1: Display the image
-    with col1:
-        st.image(image_url, use_column_width=True)  # Auto-resizes image to fit the column width
-
-    # Column 2: Display text information
-    with col2:
-        mTitle = title1
-        st.markdown(f"### {mTitle}")  # Title in a larger font size
-        st.write(description)  # Main description or information text
-        if st.button(link_text, key=f"btn_{title1}"):
-            st.switch_page(page_name)
 
 #st.markdown("## AI Fashion MNIST Cards")  # Page title
 
 # Example usage of the card
-image_url = "images/tfcube.webp"  # Replace with your actual image URL
-title = "AI Fashion MNIST"
-description = "A model that classifies fashion items using AI. Explore the dataset and learn more."
-page_name1 = "pages/projects.py"  # This should match the filename of your projects page
-link_text = "Learn More"
-pname= "pages/about.py"
-ttle= "About"
-description_about ="About me"
-
-# Call the display_card function
-display_card(image_url, title,description, page_name1,link_text)
-#display_card(image_url,ttle,description_about,pname,link_text,button_text=link_text)
-
 
 pg.run()
+
