@@ -92,7 +92,7 @@ def display_card(image_url, title1, description, page_name, link_text):
 image_url = "images/tfcube.webp"  # Replace with your actual image URL
 title = "AI Fashion MNIST"
 description = "A model that classifies fashion items using AI. Explore the dataset and learn more."
-page_name = "pages/projects.py"  # This should match the filename of your projects page
+page_name = "projects.py"  # This should match the filename of your projects page
 link_text = "Learn More"
 pname= "pages/about.py"
 ttle= "About"
