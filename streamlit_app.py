@@ -68,12 +68,5 @@ main_page = st.Page(
 )
 # ----------- NAVIGATION ----------- #
 pg = st.navigation(pages=[main_page, project,contact_page,about])
-
-# Function to display a card with image and text
-
-#st.markdown("## AI Fashion MNIST Cards")  # Page title
-
-# Example usage of the card
-
 pg.run()
 
