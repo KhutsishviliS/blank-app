@@ -38,7 +38,7 @@ st.markdown("""
 
 st.markdown("""
 <div style='background-color:#d9edf7; padding:10px; border-radius:5px;'>
-    <strong style="color: #3A485F;>ℹ️ იმ შემთხვევაში თუ იყენებთ Google Colab-ს, ეს მოდულები უკვე დაინსტალირებულია და თქვენ მხოლოდ მისი იმპორტირება დაგჭირდებათ.</strong>
+    <strong>ℹ️ იმ შემთხვევაში თუ იყენებთ Google Colab-ს, ეს მოდულები უკვე დაინსტალირებულია და თქვენ მხოლოდ მისი იმპორტირება დაგჭირდებათ.</strong>
 </div>
 """, unsafe_allow_html=True)
 
