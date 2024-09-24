@@ -5,120 +5,92 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random
 from streamlit_option_menu import option_menu
+def page_design():
+    page_bg_img ="""
+    <style>
+    [class="main st-emotion-cache-bm2z3a ea3mdgi8"]
+    {background-color: #274f69;
+        opacity: 1;
+        background-image:  linear-gradient(30deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(150deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(30deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(150deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(60deg, #c6c6c677 25%, transparent 25.5%, transparent 75%, #c6c6c677 75%, #c6c6c677), linear-gradient(60deg, #c6c6c677 25%, transparent 25.5%, transparent 75%, #c6c6c677 75%, #c6c6c677);
+        background-size: 56px 98px;
+        background-position: 0 0, 0 0, 28px 49px, 28px 49px, 0 0, 28px 49px;
+    }
+    [data-testid="stAppViewBlockContainer"]{
+    background-color: #FFF
+    }
+
+    [data-testid="stHeader"]{
+    background-color: #FE6F00
+    }
+    [data-testid="stSidebarContent"]{
+    background-color: white
+    }
+    </style>
 
 
+    """
+    st.markdown(page_bg_img,unsafe_allow_html=True)
 
-st.title(":blue[AI FASHION MNIST Classification]",anchor=False)
-#st.markdown("[link](main.py)")
-
-st.markdown("# ტანსაცმლის კლასიფიკაცია ")
-st.markdown("""მოგესალმებით მეგობრებო ეს არის ჩემი პირველი ოფიციალური პროექტი *ტანსაცმლის კლასიფიკაცია* ხელოვნური ინტელექტის დახმარებით
-ეს პროექტი შექმნილია [Python](https://www.python.org/)-ს და [TensorFlow](https://www.tensorflow.org)-ს გამოყენებით """)
-st.markdown("---")
-st.markdown("""  **თავდაპირველად გირჩევთ რომ გამოიყენოთ [Google Colab](https://colab.google/) ასე უფრო გაგიმარტივდებათ მონაცემთა დამუშავება და ვიზუალიზაცია. 
-თუ გსურთ რო გამოიყენოთ საკუთარი კომპიუტერი/ლეპტოპი მაშნ პირველ რიგში საჭიროა დაინსტალირებული გქონდეთ თქვენს IDE-ში შემდგომი მოდულები:**""")
-st.markdown("""
-            1. **tensorflow**
-            2. **numpy**
-            3. **pandas**
-            4. **matplotlib**
-            """)
-st.info("ℹ️ იმ შემთხვევაში თუ იყენებთ Google Colab-ს, ეს მოდულები უკვე დაინსტალირებულია და თქვენ მხოლოდ მისი იმპორტირება დაგჭირდებათ.")
-st.code("""
-        pip install tensorflow
-        pip install numpy
-        pip install pandas
-        pip install matplotlib
-""",language="python")
-
-
-st.markdown("* **ამის შემდეგ უნდა შემოვიტანოთ მოდულები ჩვენს IDE-ში** ")
-st.code("""
-        import tensorflow as tf
-        import numpy as np
-        import pandas as pd
-        import random
-        import matplotlib.pyplot as plt
-""",language="python")
-
-st.markdown("TensorFlow-ს პაკეტს მოყვება ფოტო მონაცემები **fashion_mnist** და ამ მონაცემებს გამოვიყენებთ ჩვენი ხელოვნური ინტელექტის სავარჯიშოდ. ")
-st.code("""
-        fashion_mnist= tf.keras.datasets.fashion_mnist  #fashion_mnist მონაცემთა იმპორტირება
-        # მონაცემთა გაყოფა სავარჯიშო და სატესტო მონაცემებად
-        (train_images,train_labels),(test_images,test_labels) = fashion_mnist.load_data()
-""",language="python")
-
-
-
-st.code("""
-        fashion_mnist= tf.keras.datasets.fashion_mnist
-        (train_images,train_labels),(test_images,test_labels) = fashion_mnist.load_data()
-        train_images_norm = train_images/255.0
-        test_images_norm = test_images/255.0
-        class_names = ["T-shirt/top","Trouser","Pullover","Dress","Coat","Sandal","Shirt","Sneaker","Bag","Ankle boot"]
-        plt.figure(figsize=(7,7))
-        for i in range(4):
-            ax = plt.subplot(2,2,i+1)
-            random_index = random.choice(range(len(train_images)))
-            plt.title(class_names[train_labels[random_index]])
-            plt.imshow(train_images[random_index],cmap=plt.cm.binary)
-""",language="python")
-st.markdown("> ფოტო მონაცემის მაგალითი:")
-fashion_mnist= tf.keras.datasets.fashion_mnist
-(train_images,train_labels),(test_images,test_labels) = fashion_mnist.load_data()
-
-train_images_norm = train_images/255.0
-test_images_norm = test_images/255.0
-
-class_names = ["T-shirt/top","Trouser","Pullover","Dress","Coat","Sandal","Shirt","Sneaker","Bag","Ankle boot"]
-
-
-
-
-
-
-def display_random_images(images, labels, class_names):
-    fig, axs = plt.subplots(2, 2, figsize=(10, 10))
-    fig.suptitle("4 Random Fashion MNIST Images", fontsize=16)
+page_design()
+###############################################
+about =st.Page(
+    page="pages/about.py",
+    title="About Me",
+    icon="🧑"
     
-    for i, ax in enumerate(axs.flat):
-        random_index = np.random.randint(0, len(images))
-        img = images[random_index]
-        label = labels[random_index]
-        
-        ax.imshow(img, cmap='gray')
-        ax.set_title(f"{class_names[label]}")
-        ax.axis('off')
+)
+project = st.Page(
+    page="pages/projects.py",
+    title="Project",
+    icon="📚"
     
-    plt.tight_layout()
-    return fig
+)
 
-st.markdown("""
-<style>
-div.stButton > button:first-child {
-    background-color: #8FD14F;
-    foreground-color:#8FD14F;
-    border: none !important;
-    color:white !important;
-}
+contact_page = st.Page(
+    page="pages/contact.py",
+    title="Contact",
+    icon="✉️"
+)
+main_page = st.Page(
+    page="streamlit_app.py",
+    title="Main Page",
+    icon="🤖",
+    default= True
+)
+# ----------- NAVIGATION ----------- #
+#pg = st.navigation(pages=[main_page, project,contact_page,about])
+#pg.run()
 
-div.stButton > button:hover {
-    background-color: #7AB33D !important;
-    color: white !important;
-}
-</style>""", unsafe_allow_html=True)
+# Function to display a card with image and text
+def display_card(image_url, title, description, page_name, link_text):
+    # Create two columns for the image and text
+    col1, col2 = st.columns([1, 2])  # Adjust the ratio to control the space distribution
 
-if st.button("Show 4 Random Images"):
-    fig = display_random_images(train_images, train_labels, class_names)
-    st.pyplot(fig)
+    # Column 1: Display the image
+    with col1:
+        st.image(image_url, use_column_width=True)  # Auto-resizes image to fit the column width
 
-if 'counter' not in st.session_state:
-    st.session_state.counter = 0
+    # Column 2: Display text information
+    with col2:
+        st.markdown(f"### {title}")  # Title in a larger font size
+        st.write(description)  # Main description or information text
+        if st.button(link_text, key=f"btn_{title}"):
+            st.switch_page(page_name)
 
-st.session_state.counter += 1
+st.markdown("## AI Fashion MNIST Cards")  # Page title
 
+# Example usage of the card
+image_url = "images/tfcube.webp"  # Replace with your actual image URL
+title = "AI Fashion MNIST"
+description = "A model that classifies fashion items using AI. Explore the dataset and learn more."
+page_name = "pages/projects.py"  # This should match the filename of your projects page
+link_text = "Learn More"
+#pname= "pages/about.py"
+#ttle= "MMN"
 
-st.markdown("---")
+# Call the display_card function
+display_card(image_url, title, description, page_name, link_text)
+#display_card(image_url, ttle, description,pname, link_text)
 
 
 
