@@ -9,18 +9,21 @@ from streamlit_option_menu import option_menu
 
 
 st.title(":blue[AI FASHION MNIST Classification]",anchor=False)
-st.markdown("[link](main.py)")
+#st.markdown("[link](main.py)")
+
 st.markdown("# ტანსაცმლის კლასიფიკაცია ")
 st.markdown("""მოგესალმებით მეგობრებო ეს არის ჩემი პირველი ოფიციალური პროექტი *ტანსაცმლის კლასიფიკაცია* ხელოვნური ინტელექტის დახმარებით
 ეს პროექტი შექმნილია [Python](https://www.python.org/)-ს და [TensorFlow](https://www.tensorflow.org)-ს გამოყენებით """)
 st.markdown("---")
-st.markdown("> #### **პირველ რიგში საჭიროა დაინსტალირებული გვქონდეს ჩვენს IDE-ში შემდგომი პაკეტები:**")
+st.markdown("""> #### **თავდაპირველად გირჩევთ რომ გამოიყენოთ [Google Colab](https://colab.google/)ასე უფრო გაგიმარტივდებათ მონაცემთა დამუშავება და ვიზუალიზაცია. 
+თუ გსურთ რო გამოიყენოთ საკუთარი კომპიუტერი/ლეპტოპი მაშნ პირველ რიგში საჭიროა დაინსტალირებული გქონდეთ თქვენს IDE-ში შემდგომი მოდულები:**""")
 st.markdown("""
             1. **tensorflow**
             2. **numpy**
             3. **pandas**
             4. **matplotlib**
             """)
+st.info("იმ შემთხვევაში თუ იყენებთ Google Colab-ს, ეს მოდულები უკვე დაინსტალირებულია და თქვენ მხოლოდ მისი იმპორტირება დაგჭირდებათ.")
 st.code("""
         pip install tensorflow
         pip install numpy
