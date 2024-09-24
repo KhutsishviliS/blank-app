@@ -92,14 +92,14 @@ def display_card(image_url, title1, description, page_name, link_text):
 image_url = "images/tfcube.webp"  # Replace with your actual image URL
 title = "AI Fashion MNIST"
 description = "A model that classifies fashion items using AI. Explore the dataset and learn more."
-page_name = "pages/projects.py"  # This should match the filename of your projects page
+page_name1 = "pages/projects.py"  # This should match the filename of your projects page
 link_text = "Learn More"
 pname= "pages/about.py"
 ttle= "About"
 description_about ="About me"
 
 # Call the display_card function
-display_card(image_url, title1=title,description= description,page_name= page_name,link_text= link_text)
+display_card(image_url, title,description, page_name1,link_text)
 #display_card(image_url,ttle,description_about,pname,link_text,button_text=link_text)
 
 pg = st.navigation(pages=[main_page, project,contact_page,about])
