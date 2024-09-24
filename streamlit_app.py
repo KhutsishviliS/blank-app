@@ -52,7 +52,7 @@ contact_page = st.Page(
     icon="✉️"
 )
 main_page = st.Page(
-    page="blank-app/streamlit_app.py",
+    page="streamlit_app.py",
     title="Main Page",
     icon="🤖",
     default= True
