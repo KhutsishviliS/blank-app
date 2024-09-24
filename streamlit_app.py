@@ -14,7 +14,7 @@ def get_img_as_base64(file):
 
 # Set up the background image in Streamlit page design
 def page_design():
-    img_base64 = get_img_as_base64("images/magicpattern1.png")
+    #img_base64 = get_img_as_base64("images/magicpattern1.png")
     page_bg_img = f"""
     <style>
     .main {{
