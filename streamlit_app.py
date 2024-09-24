@@ -8,8 +8,11 @@ from streamlit_option_menu import option_menu
 def page_design():
     page_bg_img ="""
     <style>
-    [class="main st-emotion-cache-bm2z3a ea3mdgi8"]
-    {background-color: #274f69;
+    [class="main st-emotion-cache-bm2z3a ea3mdgi8"]{background-color: #274f69;
+        opacity: 1;
+        background-image:  linear-gradient(30deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(150deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(30deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(150deg, #c6c6c6 12%, transparent 12.5%, transparent 87%, #c6c6c6 87.5%, #c6c6c6), linear-gradient(60deg, #c6c6c677 25%, transparent 25.5%, transparent 75%, #c6c6c677 75%, #c6c6c677), linear-gradient(60deg, #c6c6c677 25%, transparent 25.5%, transparent 75%, #c6c6c677 75%, #c6c6c677);
+        background-size: 56px 98px;
+        background-position: 0 0, 0 0, 28px 49px, 28px 49px, 0 0, 28px 49px;
         
     }
     [data-testid="stAppViewBlockContainer"]{
