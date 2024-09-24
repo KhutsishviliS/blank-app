@@ -137,7 +137,7 @@ div.stButton > button:hover {
 }
 </style>""", unsafe_allow_html=True)
 
-if st.button("Show 4 Random Images"):
+if st.button("Show 4 Random Images",key="randomImage"):
     fig = display_random_images(train_images, train_labels, class_names)
     st.pyplot(fig)
 
