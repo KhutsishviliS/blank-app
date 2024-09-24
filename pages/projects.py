@@ -36,7 +36,11 @@ st.markdown("""
     <p style="color: #3A485F;">4. <b>matplotlib</b></p>
     """, unsafe_allow_html=True)
 
-st.info("ℹ️ იმ შემთხვევაში თუ იყენებთ Google Colab-ს, ეს მოდულები უკვე დაინსტალირებულია და თქვენ მხოლოდ მისი იმპორტირება დაგჭირდებათ.")
+st.markdown("""
+<div style='background-color:#d9edf7; padding:10px; border-radius:5px;'>
+    <strong>ℹ️ იმ შემთხვევაში თუ იყენებთ Google Colab-ს, ეს მოდულები უკვე დაინსტალირებულია და თქვენ მხოლოდ მისი იმპორტირება დაგჭირდებათ.</strong>
+</div>
+""", unsafe_allow_html=True)
 st.code("""
         pip install tensorflow
         pip install numpy
