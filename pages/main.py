@@ -1,8 +1,6 @@
 import streamlit as st
 from streamlit_app import page_design
 
-import streamlit as st
-
 # Define placeholder image
 placeholder_image = "https://via.placeholder.com/300"
 
@@ -32,17 +30,34 @@ projects_1 = [
 ]
 
 # Page Title
-st.title("პროექტები ხელოვნურ ინტელექტში")
+st.markdown("<h1 style='color:#3A485F;'>პროექტები ხელოვნურ ინტელექტში</h1>", unsafe_allow_html=True)
 
 # Introduction Text
 st.markdown("""
-ამ გვერდზე თქვენ ნახავთ სხვადასხვა მცირე პროექტებს ხელოვნური ინტელექტის მიმართულებით, რომლებიც საშუალებას გვაძლევენ უკეთ გავიგოთ თუ რა არის AI
-ტექნოლოგია. პროექტები მოიცავს სხვადასხვა თემატიკას, როგორიცაა მონაცემთა ანალიზი, მონაცემთა დამუშავება და მომზადება,
-ხელოვნური ინტელექტის მოდელების შექმნა არსებული მონაცემებით. 
+<style>
+    .custom-text {
+        color: #3A485F;
+    }
+</style>
 
-პროექტები დაწერილია [Python](https://www.python.org/) და [TensorFlow](https://www.tensorflow.org/)-ს გამოყენებით
-""")
+<div class="custom-text">
+    ამ გვერდზე თქვენ ნახავთ სხვადასხვა მცირე პროექტებს ხელოვნური ინტელექტის მიმართულებით, რომლებიც საშუალებას გვაძლევენ უკეთ გავიგოთ თუ რა არის AI
+    ტექნოლოგია. პროექტები მოიცავს სხვადასხვა თემატიკას, როგორიცაა მონაცემთა ანალიზი, მონაცემთა დამუშავება და მომზადება,
+    ხელოვნური ინტელექტის მოდელების შექმნა არსებული მონაცემებით.
+</div>
+""", unsafe_allow_html=True)
+st.markdown("""
+<p style="color:#3A485F;">
+    პროექტები დაწერილია 
+    <a href="https://www.python.org/"  text-decoration: none;">Python</a> 
+    და 
+    <a href="https://www.tensorflow.org/"  text-decoration: none;">TensorFlow</a> 
+    -ს გამოყენებით
+</p>
+""", unsafe_allow_html=True)
+
 st.write("")
+
 # Define the function to display a project
 def display_project(title, description, image, url, id):
     col1, col2 = st.columns([1, 2])
@@ -53,8 +68,10 @@ def display_project(title, description, image, url, id):
     
     # Add project details and styled button on the right
     with col2:
-        st.subheader(title)
-        st.write(description)
+        # Custom styling for title and description
+        st.markdown(f"<h3 style='color:#3A485F;'>{title}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<p style='color:#3A485F;'>{description}</p>", unsafe_allow_html=True)
+        
         # Use st.markdown to create a styled button that links to an external or internal URL
         button_html = f"""
         <style>
@@ -89,4 +106,3 @@ for project in projects_1:
         url=project['url'],
         id=project['id']
     )
-

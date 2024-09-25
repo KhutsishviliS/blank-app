@@ -67,7 +67,13 @@ main_page = st.Page(
     default= True
 )
 
+digit_mnist = st.Page(
+    page="pages/mnist.py",
+    title="MNIST Digit Classifier",
+    icon="📚"
+)
+
 
 # ----------- NAVIGATION ----------- #
-pg = st.navigation(pages=[main_page, project,contact_page,about])
+pg = st.navigation(pages=[main_page, project,digit_mnist,contact_page,about])
 pg.run()
