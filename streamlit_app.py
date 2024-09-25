@@ -50,7 +50,7 @@ about =st.Page(
 )
 project = st.Page(
     page="pages/projects.py",
-    title="Project",
+    title="Fashion MNIST",
     icon="📚"
     
 )
@@ -66,7 +66,8 @@ main_page = st.Page(
     icon="🤖",
     default= True
 )
+
+
 # ----------- NAVIGATION ----------- #
 pg = st.navigation(pages=[main_page, project,contact_page,about])
 pg.run()
-
