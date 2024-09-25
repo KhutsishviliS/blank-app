@@ -17,7 +17,7 @@ projects_1 = [
         "title": "Project 2: MNIST Digit Classifier",
         "description": "A deep learning model trained on the MNIST dataset for handwritten digit recognition.",
         "image": "images/tfcube2.webp",
-        "url": "https://example.com/mnist",  # Link to another page
+        "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",  # Link to another page
         "id": "002"
     },
     {
