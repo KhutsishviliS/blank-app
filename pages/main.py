@@ -24,7 +24,7 @@ projects_1 = [
         "title": "Project 3: Sentiment Analysis",
         "description": "This project performs sentiment analysis on user reviews using natural language processing techniques.",
         "image": "images/tfcube3.webp",
-        "url": "https://example.com/sentiment",  # Link to another page
+        "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",  # Link to another page
         "id": "003"
     }
 ]
