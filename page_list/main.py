@@ -88,15 +88,25 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("""
+if language == "Georgian":
+    text = '''პროექტები დაწერილია 
+            <a href="https://www.python.org/" style="text-decoration: none;">Python</a> 
+            და 
+            <a href="https://www.tensorflow.org/" style="text-decoration: none;">TensorFlow</a> 
+            ბიბლიოთეკების გამოყენებით'''
+
+else:
+    text = '''Projects are written using 
+            <a href="https://www.python.org/" style="text-decoration: none;">Python</a> 
+            and 
+            <a href="https://www.tensorflow.org/" style="text-decoration: none;">TensorFlow</a> 
+            libraries'''
+
+st.markdown(f"""
 <p style="color:#3A485F;">
-    {} 
-    <a href="https://www.python.org/" text-decoration: none;">Python</a> 
-    {}
-    <a href="https://www.tensorflow.org/" text-decoration: none;">TensorFlow  </a>
-    ბიბლიოთეკების გამოყენებით
+    {text}
 </p>
-""".format("პროექტები დაწერილია" if language == 'Georgian' else "Projects are written using", "და" if language == 'Georgian' else "and"), unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 st.write("")
 
