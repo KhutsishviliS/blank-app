@@ -9,7 +9,7 @@ from streamlit_app import page_design
 
 page_design()
 
-language = st.session_state.get('Georgian')
+language = st.session_state.get('English', 'Georgian')
 
 
 #text_title = "<p color=#FE6F00>AI FASHION MNIST Classification</p>"

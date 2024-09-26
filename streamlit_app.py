@@ -38,7 +38,7 @@ def page_design():
 page_design()
 
 # Add language selection dropdown
-if 'language' not in st.session_state:
+if 'Georgian' in st.session_state:
     st.session_state['language'] = 'Georgian'  # Set default language to Georgian
 
 language = st.selectbox("Choose Language ", ["Georgian", "English"])
