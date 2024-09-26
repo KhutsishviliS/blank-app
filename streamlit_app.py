@@ -38,11 +38,9 @@ def page_design():
 page_design()
 
 # Add language selection dropdown
-if 'Georgian' in st.session_state:
+if 'language' not in st.session_state:
     st.session_state['language'] = 'Georgian'  # Set default language to Georgian
-else:
-    st.session_state["language"] ='English'
-    
+
 language = st.selectbox("Choose Language ", ["Georgian", "English"])
 
 # Store the selected language in session state
@@ -50,28 +48,28 @@ st.session_state['language'] = language
 
 ###############################################
 about = st.Page(
-    page="pages/about.py",
+    page="page_list/about.py",
     title="About Me",
     icon="🧑"
 )
 project = st.Page(
-    page="pages/projects.py",
+    page="page_list/projects.py",
     title="Fashion MNIST",
     icon="📚"
 )
 contact_page = st.Page(
-    page="pages/contact.py",
+    page="page_list/contact.py",
     title="Contact",
     icon="✉️"
 )
 main_page = st.Page(
-    page="pages/main.py",
+    page="page_list/main.py",
     title="Main Page",
     icon="🤖",
     default=True
 )
 digit_mnist = st.Page(
-    page="pages/mnist.py",
+    page="page_list/mnist.py",
     title="MNIST Digit Classifier",
     icon="📚"
 )
