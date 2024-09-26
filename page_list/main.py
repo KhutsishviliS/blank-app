@@ -93,7 +93,8 @@ st.markdown("""
     {} 
     <a href="https://www.python.org/" text-decoration: none;">Python</a> 
     {}
-    <a href="https://www.tensorflow.org/" text-decoration: none;">TensorFlow</a>
+    <a href="https://www.tensorflow.org/" text-decoration: none;">TensorFlow  </a>
+    ბიბლიოთეკების გამოყენებით
 </p>
 """.format("პროექტები დაწერილია" if language == 'Georgian' else "Projects are written using", "და" if language == 'Georgian' else "and"), unsafe_allow_html=True)
 
