@@ -41,7 +41,7 @@ page_design()
 if 'language' not in st.session_state:
     st.session_state['language'] = 'Georgian'  # Set default language to Georgian
 
-language = st.selectbox("Choose Language ", ["Georgian", "English"])
+language = st.selectbox("Choose Language ", ["Georgian", "English"],key="language_selector")
 
 # Store the selected language in session state
 st.session_state['language'] = language
