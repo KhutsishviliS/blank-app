@@ -5,7 +5,7 @@ from streamlit_app import page_design
 #placeholder_image = "https://via.placeholder.com/300"
 
 # Get the selected language from session state
-language = st.session_state.get('language', 'Georgian')
+language = st.session_state.get('English', 'Georgian')
 
 # Define project data with external/internal URLs
 projects_1 = [

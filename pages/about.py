@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit_app import page_design
 
 page_design()
-language = st.session_state.get('language', 'Georgian')
+language = st.session_state.get('English', 'Georgian')
 
 if language =="Georgian":
     # Custom color for the title
