@@ -15,8 +15,8 @@ projects_1 = [
             "English": "Project 1: Fashion MNIST Clothing Classifier"
         },
         "description": {
-            "Georgian": "ეს პროექტი მოიცავს სხვადასხვა ფინანსური პორტფელის ანალიზს.",
-            "English": "This project involves analyzing the performance of various financial portfolios."
+            "Georgian": "ნეირონული ქსელის მოდელი, რომელიც ნავარჯიშებია MNIST-ის ტანისამოსის მონაცემთა ნაკრებზე, ტანსაცმლის სახეობების ავტომატური კლასიფიკაციის მიზნით.",
+            "English": "A deep learning model trained on the Fashion MNIST dataset for clothing item classification."
         },
         "image": "images/tfcube1.webp",
         "url": "https://learndeeplearningwithsaba.streamlit.app/projects",
@@ -28,7 +28,7 @@ projects_1 = [
             "English": "Project 2: MNIST Digit Classifier"
         },
         "description": {
-            "Georgian": "სიღრმისეული მოდელი MNIST მონაცემთა ბაზაზე ხელნაწერი ციფრების ამოცნობისთვის.",
+            "Georgian": "ნეირონული ქსელის მოდელი რომელიც ნავარჯიშებია MNIST მონაცემთა ნაკრებზე, 0-დან 9-მდე ხელნაწერი ციფრების ავტომატური ამოცნობისა და კლასიფიკაციისთვის.",
             "English": "A deep learning model trained on the MNIST dataset for handwritten digit recognition."
         },
         "image": "images/tfcube2.webp",
