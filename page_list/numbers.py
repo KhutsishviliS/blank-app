@@ -53,7 +53,7 @@ def convert_image_to_bytes(image):
 # Page title and instructions based on language
 if language == "Georgian":
     st.markdown("""<h1 style="color:#3A485F;">MNIST ციფრების კლასიფიკაცია</h1>""", unsafe_allow_html=True)
-    st.markdown("""<p style="color:#3A485F;">აღნიშნული ნეირონული ქსელი ნავარჯიშებია სპეციალურად ამ პროექტისთვის შექმნილ მონაცემთა ნაკრებზე რომელიც შედგება 500 ფოტო მონაცემისგან </p>""",unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">აღნიშნული ნეირონული ქსელი ნავარჯიშებია სპეციალურად ამ პროექტისთვის შექმნილ მონაცემებზე რომელიც შედგება 500 ფოტო მონაცემისგან </p>""",unsafe_allow_html=True)
     st.markdown("""<p style="color:#3A485F;">დააგენერირეთ ციფრი ქვემოთ მოცემულ გრაფიკზე და იხილეთ პროგნოზი რეალურ დროში</p>""", unsafe_allow_html=True)
 else:
     st.markdown("""<h1 style="color:#3A485F;">MNIST Digit Classification Web App</h1>""", unsafe_allow_html=True)
