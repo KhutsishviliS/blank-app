@@ -74,6 +74,12 @@ digit_mnist = st.Page(
     icon="📚"
 )
 
+number_classification = st.Page(
+    page="page_list/numbers.py",
+    title = "Try it out",
+    icon= "📺"
+
+)
 # ----------- NAVIGATION ----------- #
-pg = st.navigation(pages=[main_page, project, digit_mnist, contact_page, about])
+pg = st.navigation(pages=[main_page, project, digit_mnist, number_classification, about])#,contact_page
 pg.run()

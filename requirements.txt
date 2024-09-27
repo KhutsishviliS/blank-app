@@ -2,3 +2,5 @@ streamlit
 tensorflow
 matplotlib
 streamlit-option-menu
+pillow
+streamlit-drawable-canvas
