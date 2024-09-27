@@ -52,11 +52,13 @@ def convert_image_to_bytes(image):
 
 # Page title and instructions based on language
 if language == "Georgian":
-    st.markdown("""<h1 style="color:3A485F;">MNIST ციფრების კლასიფიკაცია</h1>""", unsafe_allow_html=True)
-    st.markdown("""<p>დააგენერირეთ ციფრი ქვემოთ მოცემულ გრაფიკზე და იხილეთ პროგნოზი რეალურ დროში</p>""", unsafe_allow_html=True)
+    st.markdown("""<h1 style="color:#3A485F;">MNIST ციფრების კლასიფიკაცია</h1>""", unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">აღნიშნული ნეირონული ქსელი ნავარჯიშებია სპეციალურად ამ პროექტისთვის შექმნილ მონაცემთა ნაკრებზე ჩრომელიც შედგება 500 ფოტო მონაცემისგან </p>""",unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">დააგენერირეთ ციფრი ქვემოთ მოცემულ გრაფიკზე და იხილეთ პროგნოზი რეალურ დროში</p>""", unsafe_allow_html=True)
 else:
-    st.markdown("""<h1 style="color:3A485F;">MNIST Digit Classification Web App</h1>""", unsafe_allow_html=True)
-    st.markdown("""<p style="color:3A485F;">Draw a digit on the canvas below and see real-time predictions</p>""", unsafe_allow_html=True)
+    st.markdown("""<h1 style="color:#3A485F;">MNIST Digit Classification Web App</h1>""", unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">This neural network is trained on a custom dataset of 500 images, collected specifically for this project.</p>""",unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">Draw a digit on the canvas below and see real-time predictions</p>""", unsafe_allow_html=True)
 
 # Load the custom model
 model = load_custom_model()
@@ -70,7 +72,7 @@ if model is not None:
         background_color="#FFFFFF",
         update_streamlit=True,
         height=350,
-        width=350,
+        width=704,
         drawing_mode="freedraw",
         key="canvas"
     )
