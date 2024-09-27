@@ -3,6 +3,7 @@ from streamlit_drawable_canvas import st_canvas
 import numpy as np
 import tensorflow as tf
 from PIL import Image, ImageOps
+import pickle5 as pickle
 
 from streamlit_app import page_design
 
@@ -13,8 +14,12 @@ language = st.session_state.get('language', 'Georgian')
 @st.cache_resource
 def load_mnist_model():
     try:
-        model = tf.keras.models.load_model("model/mnist_model.h5")
-        return model
+        with open('model/mnist_model.pkl', 'rb') as file:
+            loaded_model = pickle.load(file)
+
+        return loaded_model
+        #model = tf.keras.models.load_model("model/mnist_model.h5")
+        #return model
     except Exception as e:
         st.error(f"Error loading the model: {str(e)}")
         return None
@@ -61,8 +66,8 @@ if model is not None:
         stroke_color="#000000",
         background_color="#FFFFFF",
         update_streamlit=True,
-        height=350,
-        width=350,
+        height=250,
+        width=250,
         drawing_mode="freedraw",
         key="canvas"
     )
