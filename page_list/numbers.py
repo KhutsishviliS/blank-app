@@ -25,7 +25,7 @@ def process_image(image_data):
     image = Image.fromarray(image_data.astype('uint8'), 'RGBA')
     image = image.convert("RGB")  # Convert to RGB
     
-    # Resize to 244x244 as required by the model
+    # Resize to 244x244 as required by the models
     image = image.resize((244, 244))
     
     # Convert to numpy array and normalize between 0 and 1
