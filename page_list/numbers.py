@@ -2,12 +2,11 @@ import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 import numpy as np
 import tensorflow as tf
-from PIL import Image, ImageOps
+from PIL import Image
 import io
 
-from streamlit_app import page_design
 
-page_design()
+
 
 language = st.session_state.get('language', 'Georgian')
 
@@ -23,12 +22,12 @@ def load_custom_model():
 def process_image(image_data):
     """ Process image: Convert RGBA -> RGB, resize, and normalize """
     image = Image.fromarray(image_data.astype('uint8'), 'RGBA')
-    image = image.convert("RGB")  # Convert to RGB
+    image = image.convert("RGB")  
     
-    # Resize to 244x244 as required by the models
+
     image = image.resize((244, 244))
     
-    # Convert to numpy array and normalize between 0 and 1
+    
     image_array = np.array(image).astype('float32') / 255.0
     
     return image_array.reshape(1, 244, 244, 3), image

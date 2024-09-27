@@ -11,12 +11,8 @@ page_design()
 
 language = st.session_state.get('language', 'Georgian')
 
-
-#text_title = "<p color=#FE6F00>AI FASHION MNIST Classification</p>"
-
 st.markdown('<h1 style="color:#FE6F00";>AI FASHION MNIST Classification</h1>',unsafe_allow_html=True)
 
-#st.markdown("[link](main.py)")
 
 if language =="Georgian":
         st.markdown('<h2 style="color:#3A485F">ტანსაცმლის კლასიფიკაცია</h2>',unsafe_allow_html=True)
@@ -44,12 +40,11 @@ else:
 
 
 st.markdown("""
-            
-    <p style="color: #3A485F;">1. <b>tensorflow</b></p>
-    <p style="color: #3A485F;">2. <b>numpy</b></p>
-    <p style="color: #3A485F;">3. <b>pandas</b></p>
-    <p style="color: #3A485F;">4. <b>matplotlib</b></p>
-    """, unsafe_allow_html=True)
+        <p style="color: #3A485F;">1. <b>tensorflow</b></p>
+        <p style="color: #3A485F;">2. <b>numpy</b></p>
+        <p style="color: #3A485F;">3. <b>pandas</b></p>
+        <p style="color: #3A485F;">4. <b>matplotlib</b></p>
+        """, unsafe_allow_html=True)
 
 if language =="Georgian":
         st.markdown("""
@@ -83,9 +78,6 @@ else:
         After this, we need to import the modules into our IDE/Google Colab.</span>
         """, unsafe_allow_html=True)
 
-
-
-
 st.code("""
         import tensorflow as tf
         import numpy as np
@@ -113,8 +105,6 @@ else:
         """, language="python")
 
 
-
-
 st.code("""
         # მონაცემთა ნორმალიზება: პიქსელების 
         
@@ -129,10 +119,10 @@ st.code("""
         class_names = ["T-shirt/top","Trouser","Pullover","Dress","Coat","Sandal","Shirt","Sneaker","Bag","Ankle boot"]
         plt.figure(figsize=(7,7))
         for i in range(4):
-            ax = plt.subplot(2,2,i+1)
-            random_index = random.choice(range(len(train_images)))
-            plt.title(class_names[train_labels[random_index]])
-            plt.imshow(train_images[random_index],cmap=plt.cm.binary)
+                ax = plt.subplot(2,2,i+1)
+                random_index = random.choice(range(len(train_images)))
+                plt.title(class_names[train_labels[random_index]])
+                plt.imshow(train_images[random_index],cmap=plt.cm.binary)
 """,language="python")
 st.markdown("<p style='color:#3A485F;' ფოტო მონაცემის მაგალითი:</p>", unsafe_allow_html=True)
 fashion_mnist= tf.keras.datasets.fashion_mnist
@@ -145,24 +135,20 @@ class_names = ["T-shirt/top","Trouser","Pullover","Dress","Coat","Sandal","Shirt
 
 
 
-
-
-
 def display_random_images(images, labels, class_names):
-    fig, axs = plt.subplots(2, 2, figsize=(10, 10))
-    fig.suptitle("4 Random Fashion MNIST Images", fontsize=16)
-    
-    for i, ax in enumerate(axs.flat):
-        random_index = np.random.randint(0, len(images))
-        img = images[random_index]
-        label = labels[random_index]
+        fig, axs = plt.subplots(2, 2, figsize=(10, 10))
+        fig.suptitle("4 Random Fashion MNIST Images", fontsize=16)
+        for i, ax in enumerate(axs.flat):
+                random_index = np.random.randint(0, len(images))
+                img = images[random_index]
+                label = labels[random_index]
+                
+                ax.imshow(img, cmap='gray')
+                ax.set_title(f"{class_names[label]}")
+                ax.axis('off')
         
-        ax.imshow(img, cmap='gray')
-        ax.set_title(f"{class_names[label]}")
-        ax.axis('off')
-    
-    plt.tight_layout()
-    return fig
+        plt.tight_layout()
+        return fig
 
 st.markdown("""
 <style>

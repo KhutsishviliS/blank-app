@@ -1,6 +1,4 @@
 import streamlit as st
-
-# Get the selected language from session state
 language = st.session_state.get('language', 'Georgian')
 
 if language =="Georgian":
@@ -19,7 +17,4 @@ else:
     button_html = f"""
     <a href="https://learndeeplearningwithsaba.streamlit.app/" target="_self">Go back</button></a>
     """
-
-
-
 st.markdown(button_html, unsafe_allow_html=True)
