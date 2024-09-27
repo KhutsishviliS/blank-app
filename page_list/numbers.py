@@ -72,7 +72,7 @@ if model is not None:
         background_color="#FFFFFF",
         update_streamlit=True,
         height=350,
-        width=750,
+        width=350,
         drawing_mode="freedraw",
         key="canvas"
     )
