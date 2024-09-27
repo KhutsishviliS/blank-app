@@ -1,13 +1,7 @@
 import streamlit as st
 import tensorflow as tf
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-import random
-from streamlit_option_menu import option_menu
-from streamlit_app import page_design
-
-page_design()
 
 language = st.session_state.get('language', 'Georgian')
 

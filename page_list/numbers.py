@@ -5,9 +5,6 @@ import tensorflow as tf
 from PIL import Image
 import io
 
-
-
-
 language = st.session_state.get('language', 'Georgian')
 
 @st.cache_resource

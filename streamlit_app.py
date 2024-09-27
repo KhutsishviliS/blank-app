@@ -1,17 +1,4 @@
 import streamlit as st
-import tensorflow as tf
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import random
-from streamlit_option_menu import option_menu
-import base64
-
-def get_img_as_base64(file):
-    with open(file, "rb") as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
-
 # Set up the background image in Streamlit page design
 def page_design():
     page_bg_img = f"""
