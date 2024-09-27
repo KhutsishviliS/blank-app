@@ -57,11 +57,7 @@ project = st.Page(
     title="Fashion MNIST",
     icon="📚"
 )
-contact_page = st.Page(
-    page="page_list/contact.py",
-    title="Contact",
-    icon="✉️"
-)
+
 main_page = st.Page(
     page="page_list/main.py",
     title="Main Page",
