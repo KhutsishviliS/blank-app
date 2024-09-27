@@ -3,6 +3,7 @@ from streamlit_drawable_canvas import st_canvas
 import numpy as np
 import tensorflow as tf
 from PIL import Image, ImageOps
+import io
 
 from streamlit_app import page_design
 
@@ -11,31 +12,29 @@ page_design()
 language = st.session_state.get('language', 'Georgian')
 
 @st.cache_resource
-def load_mnist_model():
+def load_custom_model():
     try:
-        model = tf.keras.models.load_model("model/mnist_model.h5")
+        model = tf.keras.models.load_model("models/mnist_model2.h5")  # Adjust the model path
         return model
     except Exception as e:
         st.error(f"Error loading the model: {str(e)}")
         return None
 
 def process_image(image_data):
-    # Convert the RGBA image to grayscale
+    """ Process image: Convert RGBA -> RGB, resize, and normalize """
     image = Image.fromarray(image_data.astype('uint8'), 'RGBA')
-    image = ImageOps.grayscale(image)
+    image = image.convert("RGB")  # Convert to RGB
     
-    # Resize the image
-    image = image.resize((28, 28))
+    # Resize to 244x244 as required by the model
+    image = image.resize((244, 244))
     
-    # Convert to numpy array and normalize
+    # Convert to numpy array and normalize between 0 and 1
     image_array = np.array(image).astype('float32') / 255.0
     
-    # Invert the colors (white digit on black background)
-    image_array = 1 - image_array
-    
-    return image_array.reshape(1, 28, 28, 1), image
+    return image_array.reshape(1, 244, 244, 3), image
 
 def predict_digit(model, image_array):
+    """ Perform the prediction on the processed image """
     try:
         prediction = model.predict(image_array)
         predicted_digit = prediction.argmax(axis=1)[0]
@@ -45,19 +44,28 @@ def predict_digit(model, image_array):
         st.error(f"Error making prediction: {str(e)}")
         return None, None
 
-if language == "Georgian":
-    st.markdown("""<h1 style="color:3A485F;">MNIST ციფრების კლასიფიკაცია</h1>""",unsafe_allow_html=True)
-    st.markdown("""<p>დააგენერირეთ ციფრი ქვემოთ მოცემულ გრაფიკზე და იხილეთ პროგნოზი რეალურ დროში</p>""",unsafe_allow_html=True)
-else:
-    st.markdown("""<h1 style="color:3A485F;">MNIST Digit Classification Web App</h1>""",unsafe_allow_html=True)
-    st.markdown("""<p style="color:3A485F;">Draw a digit on the canvas below and see real-time predictions</p>""",unsafe_allow_html=True)
+def convert_image_to_bytes(image):
+    """ Convert PIL image to bytes for downloading """
+    img_byte_arr = io.BytesIO()
+    image.save(img_byte_arr, format='PNG')
+    return img_byte_arr.getvalue()
 
-model = load_mnist_model()
+# Page title and instructions based on language
+if language == "Georgian":
+    st.markdown("""<h1 style="color:3A485F;">MNIST ციფრების კლასიფიკაცია</h1>""", unsafe_allow_html=True)
+    st.markdown("""<p>დააგენერირეთ ციფრი ქვემოთ მოცემულ გრაფიკზე და იხილეთ პროგნოზი რეალურ დროში</p>""", unsafe_allow_html=True)
+else:
+    st.markdown("""<h1 style="color:3A485F;">MNIST Digit Classification Web App</h1>""", unsafe_allow_html=True)
+    st.markdown("""<p style="color:3A485F;">Draw a digit on the canvas below and see real-time predictions</p>""", unsafe_allow_html=True)
+
+# Load the custom model
+model = load_custom_model()
 
 if model is not None:
+    # Drawing canvas settings
     canvas_result = st_canvas(
         fill_color="#FFFFFF",
-        stroke_width=20,
+        stroke_width=10,
         stroke_color="#000000",
         background_color="#FFFFFF",
         update_streamlit=True,
@@ -74,9 +82,20 @@ if model is not None:
             predicted_digit, confidence = predict_digit(model, image_array)
 
             if predicted_digit is not None:
-                st.markdown(f"""<p style="color:#3A485F;">Predicted Digit: {predicted_digit}</p>""",unsafe_allow_html=True)
-                st.markdown(f"""<p style="color:#3A485F;">Confidence: {confidence * 100:.2f}% </p>""",unsafe_allow_html=True)
-                st.image(processed_image, caption="Processed Image (28x28)", width=100)
+                st.markdown(f"""<p style="color:#3A485F;">Predicted Digit: {predicted_digit}</p>""", unsafe_allow_html=True)
+                st.markdown(f"""<p style="color:#3A485F;">Confidence: {confidence * 100:.2f}% </p>""", unsafe_allow_html=True)
+                st.image(processed_image, caption="Processed Image (244x244)", width=100)
+
+                # Convert the processed image to bytes for downloading
+                image_bytes = convert_image_to_bytes(processed_image)
+
+                # Download button
+                st.download_button(
+                    label="Download Image",
+                    data=image_bytes,
+                    file_name="drawn_digit.png",
+                    mime="image/png"
+                )
         else:
             st.write("Please draw a digit on the canvas.")
     else:
