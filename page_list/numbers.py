@@ -3,7 +3,6 @@ from streamlit_drawable_canvas import st_canvas
 import numpy as np
 import tensorflow as tf
 from PIL import Image, ImageOps
-import io
 
 from streamlit_app import page_design
 
@@ -14,7 +13,7 @@ language = st.session_state.get('language', 'Georgian')
 @st.cache_resource
 def load_mnist_model():
     try:
-        model = tf.keras.models.load_model("models/mnist_model.h5")
+        model = tf.keras.models.load_model("model/mnist_model.h5")
         return model
     except Exception as e:
         st.error(f"Error loading the model: {str(e)}")
@@ -41,17 +40,10 @@ def predict_digit(model, image_array):
         prediction = model.predict(image_array)
         predicted_digit = prediction.argmax(axis=1)[0]
         confidence = prediction[0][predicted_digit]
-        
         return predicted_digit, confidence
     except Exception as e:
         st.error(f"Error making prediction: {str(e)}")
         return None, None
-
-def convert_image_to_bytes(image):
-    """ Convert PIL image to bytes for downloading. """
-    img_byte_arr = io.BytesIO()
-    image.save(img_byte_arr, format='PNG')
-    return img_byte_arr.getvalue()
 
 if language == "Georgian":
     st.markdown("""<h1 style="color:3A485F;">MNIST ციფრების კლასიფიკაცია</h1>""",unsafe_allow_html=True)
@@ -65,7 +57,7 @@ model = load_mnist_model()
 if model is not None:
     canvas_result = st_canvas(
         fill_color="#FFFFFF",
-        stroke_width=5,
+        stroke_width=20,
         stroke_color="#000000",
         background_color="#FFFFFF",
         update_streamlit=True,
@@ -85,17 +77,6 @@ if model is not None:
                 st.markdown(f"""<p style="color:#3A485F;">Predicted Digit: {predicted_digit}</p>""",unsafe_allow_html=True)
                 st.markdown(f"""<p style="color:#3A485F;">Confidence: {confidence * 100:.2f}% </p>""",unsafe_allow_html=True)
                 st.image(processed_image, caption="Processed Image (28x28)", width=100)
-
-                # Convert the processed image to bytes
-                image_bytes = convert_image_to_bytes(processed_image)
-
-                # Download button
-                st.download_button(
-                    label="Download Image",
-                    data=image_bytes,
-                    file_name="drawn_digit.png",
-                    mime="image/png"
-                )
         else:
             st.write("Please draw a digit on the canvas.")
     else:
