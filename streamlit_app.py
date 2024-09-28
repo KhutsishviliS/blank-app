@@ -63,5 +63,5 @@ number_classification = st.Page(
 
 )
 # ----------- NAVIGATION ---------- #
-pg = st.navigation(pages=[main_page, project,digit_mnist, number_classification, about])#,contact_page 
+pg = st.navigation(pages=[main_page, project, number_classification, about])#,contact_page digit_mnist
 pg.run()
