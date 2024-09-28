@@ -35,19 +35,19 @@ projects_1 = [
         "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",
         "id": "002"
     },
-    {
-        "title": {
-            "Georgian": "პროექტი 3: სენტიმენტის ანალიზი",
-            "English": "Project 3: Sentiment Analysis"
-        },
-        "description": {
-            "Georgian": "ეს პროექტი განიხილავს მომხმარებლის შეფასებების სენტიმენტის ანალიზს.",
-            "English": "This project performs sentiment analysis on user reviews using natural language processing techniques."
-        },
-        "image": "images/tfcube3.webp",
-        "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",
-        "id": "003"
-    }
+    # {
+    #     "title": {
+    #         "Georgian": "პროექტი 3: სენტიმენტის ანალიზი",
+    #         "English": "Project 3: Sentiment Analysis"
+    #     },
+    #     "description": {
+    #         "Georgian": "ეს პროექტი განიხილავს მომხმარებლის შეფასებების სენტიმენტის ანალიზს.",
+    #         "English": "This project performs sentiment analysis on user reviews using natural language processing techniques."
+    #     },
+    #     "image": "images/tfcube3.webp",
+    #     "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",
+    #     "id": "003"
+    # }
 ]
 button_name = {
     "Georgian":"იხილეთ გვერდი",
