@@ -22,32 +22,32 @@ projects_1 = [
         "url": "https://learndeeplearningwithsaba.streamlit.app/projects",
         "id": "001"
     },
-    # {
-    #     "title": {
-    #         "Georgian": "პროექტი 2: MNIST ციფრების კლასიფიკატორი",
-    #         "English": "Project 2: MNIST Digit Classifier"
-    #     },
-    #     "description": {
-    #         "Georgian": "ნეირონული ქსელის მოდელი რომელიც ნავარჯიშებია MNIST მონაცემთა ნაკრებზე, 0-დან 9-მდე ხელნაწერი ციფრების ავტომატური ამოცნობისა და კლასიფიკაციისთვის.",
-    #         "English": "A deep learning model trained on the MNIST dataset for handwritten digit recognition."
-    #     },
-    #     "image": "images/tfcube2.webp",
-    #     "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",
-    #     "id": "002"
-    # },
-    # {
-    #     "title": {
-    #         "Georgian": "პროექტი 3: სენტიმენტის ანალიზი",
-    #         "English": "Project 3: Sentiment Analysis"
-    #     },
-    #     "description": {
-    #         "Georgian": "ეს პროექტი განიხილავს მომხმარებლის შეფასებების სენტიმენტის ანალიზს.",
-    #         "English": "This project performs sentiment analysis on user reviews using natural language processing techniques."
-    #     },
-    #     "image": "images/tfcube3.webp",
-    #     "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",
-    #     "id": "003"
-    # }
+    {
+        "title": {
+            "Georgian": "პროექტი 2: MNIST ციფრების კლასიფიკატორი",
+            "English": "Project 2: MNIST Digit Classifier"
+        },
+        "description": {
+            "Georgian": "ნეირონული ქსელის მოდელი რომელიც ნავარჯიშებია MNIST მონაცემთა ნაკრებზე, 0-დან 9-მდე ხელნაწერი ციფრების ავტომატური ამოცნობისა და კლასიფიკაციისთვის.",
+            "English": "A deep learning model trained on the MNIST dataset for handwritten digit recognition."
+        },
+        "image": "images/tfcube2.webp",
+        "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",
+        "id": "002"
+    },
+    {
+        "title": {
+            "Georgian": "პროექტი 3: სენტიმენტის ანალიზი",
+            "English": "Project 3: Sentiment Analysis"
+        },
+        "description": {
+            "Georgian": "ეს პროექტი განიხილავს მომხმარებლის შეფასებების სენტიმენტის ანალიზს.",
+            "English": "This project performs sentiment analysis on user reviews using natural language processing techniques."
+        },
+        "image": "images/tfcube3.webp",
+        "url": "https://learndeeplearningwithsaba.streamlit.app/mnist",
+        "id": "003"
+    }
 ]
 button_name = {
     "Georgian":"იხილეთ გვერდი",
