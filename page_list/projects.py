@@ -79,7 +79,7 @@ st.code("""
         import random
         import matplotlib.pyplot as plt
 """,language="python")
-if language == "Georgian:":
+if language == "Georgian":
         st.markdown('<blockquote style="color:#3A485F;">TensorFlow-ს პაკეტს მოყვება ფოტო მონაცემები <b>fashion_mnist</b> და ამ მონაცემებს გამოვიყენებთ ჩვენი ხელოვნური ინტელექტის სავარჯიშოდ.</blockquote> ', unsafe_allow_html=True)
         st.code("""
                 # fashion_mnist მონაცემთა იმპორტირება
