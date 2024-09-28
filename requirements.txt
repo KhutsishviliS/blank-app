@@ -10,4 +10,4 @@ pandas
 numpy
 opencv-python
 opencv-python-headless
-streamlit >=1.36.0
+streamlit 
