@@ -87,8 +87,8 @@ if model is not None:
 
                 if top_5_indices is not None:
                     # Display top prediction and confidence directly below the canvas
-                    st.markdown(f"""<b style="color:#FE6F00;">Top Prediction: {top_5_indices[0]}</b>""", unsafe_allow_html=True)
-                    st.markdown(f"""<b style="color:#FE6F00;">Confidence: {top_5_confidences[0] * 100:.2f}% </b>""", unsafe_allow_html=True)
+                    st.markdown(f"""<p><b style="color:#FE6F00;">Top Prediction: {top_5_indices[0]}</b></p>""", unsafe_allow_html=True)
+                    st.markdown(f"""<p><b style="color:#FE6F00;">Confidence: {top_5_confidences[0] * 100:.2f}% </b></p>""", unsafe_allow_html=True)
                     
                     # Optionally display processed image below the canvas (you can remove this if not needed)
                     st.image(processed_image, caption="Processed Image (244x244)", width=100)
