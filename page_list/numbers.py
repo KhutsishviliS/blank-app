@@ -61,54 +61,62 @@ else:
 model = load_custom_model()
 
 if model is not None:
-    # Drawing canvas settings (no columns, just the canvas first)
-    canvas_result = st_canvas(
-        fill_color="#FFFFFF",
-        stroke_width=10,
-        stroke_color="#000000",
-        background_color="#FFFFFF",
-        update_streamlit=True,
-        height=350,
-        width=350,
-        drawing_mode="freedraw",
-        key="canvas"
-    )
+    # Create two equal columns with a 1:1 ratio
+    col1, col2 = st.columns(2)
 
-    if canvas_result.image_data is not None:
-        # Check if the canvas is not empty (all black)
-        if np.sum(canvas_result.image_data) > 0:
-            image_array, processed_image = process_image(canvas_result.image_data)
-            top_5_indices, top_5_confidences = predict_digit(model, image_array)
+    with col1:
+        # Drawing canvas settings
+        canvas_result = st_canvas(
+            fill_color="#FFFFFF",
+            stroke_width=10,
+            stroke_color="#000000",
+            background_color="#FFFFFF",
+            update_streamlit=True,
+            height=350,
+            width=350,
+            drawing_mode="freedraw",
+            key="canvas"
+        )
 
-            if top_5_indices is not None:
-                # Display processed image and prediction results
-                st.markdown(f"""<p style="color:#3A485F;">Top Prediction: {top_5_indices[0]}</p>""", unsafe_allow_html=True)
-                st.markdown(f"""<p style="color:#3A485F;">Confidence: {top_5_confidences[0] * 100:.2f}% </p>""", unsafe_allow_html=True)
-                
-                st.image(processed_image, caption="Processed Image (244x244)", width=100)
+        # Display prediction results below the canvas
+        if canvas_result.image_data is not None:
+            # Check if the canvas is not empty (all black)
+            if np.sum(canvas_result.image_data) > 0:
+                image_array, processed_image = process_image(canvas_result.image_data)
+                top_5_indices, top_5_confidences = predict_digit(model, image_array)
 
-                # Convert the processed image to bytes for downloading
-                image_bytes = convert_image_to_bytes(processed_image)
+                if top_5_indices is not None:
+                    # Display top prediction and confidence directly below the canvas
+                    st.markdown(f"""<p style="color:#3A485F;">Top Prediction: {top_5_indices[0]}</p>""", unsafe_allow_html=True)
+                    st.markdown(f"""<p style="color:#3A485F;">Confidence: {top_5_confidences[0] * 100:.2f}% </p>""", unsafe_allow_html=True)
+                    
+                    # Optionally display processed image below the canvas (you can remove this if not needed)
+                    st.image(processed_image, caption="Processed Image (244x244)", width=100)
 
-                # Download button for the processed image
-                st.download_button(
-                    label="Download Image",
-                    data=image_bytes,
-                    file_name="drawn_digit.png",
-                    mime="image/png"
-                )
+                    # Convert the processed image to bytes for downloading
+                    image_bytes = convert_image_to_bytes(processed_image)
 
-                # Prepare data for the horizontal bar chart
-                prediction_data = pd.DataFrame({
-                    'Prediction': top_5_indices,
-                    'Confidence': top_5_confidences
-                })
-
-                # Plot top 5 predictions using Streamlit's built-in plotting function
-                st.bar_chart(prediction_data.set_index('Prediction'))
+                    # Download button for the processed image
+                    st.download_button(
+                        label="Download Image",
+                        data=image_bytes,
+                        file_name="drawn_digit.png",
+                        mime="image/png"
+                    )
+            else:
+                st.write("Please draw a digit on the canvas.")
         else:
             st.write("Please draw a digit on the canvas.")
-    else:
-        st.write("Please draw a digit on the canvas.")
+
+    with col2:
+        if top_5_indices is not None:
+            # Prepare data for the horizontal bar chart
+            prediction_data = pd.DataFrame({
+                'Prediction': top_5_indices,
+                'Confidence': top_5_confidences
+            })
+
+            # Plot top 5 predictions using Streamlit's built-in plotting function
+            st.bar_chart(prediction_data.set_index('Prediction'))
 else:
     st.error("Failed to load the model. Please check the model path and try again.")
