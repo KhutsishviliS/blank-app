@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 import io
-import pandas as pd
+import cv2
 
 language = st.session_state.get('language', 'Georgian')
 
@@ -32,14 +32,12 @@ def process_image(image_data):
 def predict_digit(model, image_array):
     """ Perform the prediction on the processed image """
     try:
-        # Predict and return the top 5 predictions with their confidence
+        # Predict and return the top prediction with its confidence
         prediction = model.predict(image_array)
-        top_5_indices = np.argsort(prediction[0])[-5:][::-1]  # Top 5 predictions
-        top_5_confidences = prediction[0][top_5_indices]
-        return top_5_indices, top_5_confidences
+        return prediction[0]  # Return the full prediction array for bar plot
     except Exception as e:
         st.error(f"Error making prediction: {str(e)}")
-        return None, None
+        return None
 
 def convert_image_to_bytes(image):
     """ Convert PIL image to bytes for downloading """
@@ -47,21 +45,58 @@ def convert_image_to_bytes(image):
     image.save(img_byte_arr, format='PNG')
     return img_byte_arr.getvalue()
 
+def compute_saliency_map(model, image_array):
+    """ Compute the saliency map """
+    image_array = tf.convert_to_tensor(image_array)
+    with tf.GradientTape() as tape:
+        tape.watch(image_array)
+        preds = model(image_array)
+        top_pred_index = tf.argmax(preds[0])
+        top_pred = preds[0][top_pred_index]
+
+    grads = tape.gradient(top_pred, image_array)
+    saliency = tf.reduce_max(tf.abs(grads), axis=-1).numpy()
+    return saliency[0]
+
+def display_saliency_on_image(image, saliency):
+    """ Overlay the saliency map on the image with better visualization """
+    # Normalize and apply a colormap to the saliency map
+    saliency = saliency - saliency.min()
+    saliency = saliency / saliency.max()  # Normalize to [0, 1]
+    saliency = np.uint8(255 * saliency)  # Scale to [0, 255]
+    
+    # Convert the saliency to a heatmap using a colormap
+    heatmap = cv2.applyColorMap(saliency, cv2.COLORMAP_JET)
+
+    # Convert the image to a format compatible with OpenCV
+    image_cv = np.array(image)
+
+    # Blend the heatmap with the original image
+    blended = cv2.addWeighted(image_cv, 0.6, heatmap, 0.4, 0)
+    return Image.fromarray(blended)
+
 # Page title and instructions based on language
 if language == "Georgian":
     st.markdown("""<h1 style="color:#3A485F;">MNIST ციფრების კლასიფიკაცია</h1>""", unsafe_allow_html=True)
-    st.markdown("""<p style="color:#3A485F;">აღნიშნული ნეირონული ქსელი ნავარჯიშებია სპეციალურად ამ პროექტისთვის შექმნილ მონაცემებზე რომელიც შედგება 500 ფოტო მონაცემისგან </p>""",unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">აღნიშნული ნეირონული ქსელი ნავარჯიშებია სპეციალურად ამ პროექტისთვის შექმნილ მონაცემებზე რომელიც შედგება 500 ფოტო მონაცემისგან </p>""", unsafe_allow_html=True)
     st.markdown("""<p style="color:#3A485F;">დააგენერირეთ ციფრი ქვემოთ მოცემულ გრაფიკზე და იხილეთ პროგნოზი რეალურ დროში</p>""", unsafe_allow_html=True)
 else:
     st.markdown("""<h1 style="color:#3A485F;">MNIST Digit Classification Web App</h1>""", unsafe_allow_html=True)
-    st.markdown("""<p style="color:#3A485F;">This neural network is trained on a custom dataset of 500 images, collected specifically for this project.</p>""",unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">This neural network is trained on a custom dataset of 500 images, collected specifically for this project.</p>""", unsafe_allow_html=True)
     st.markdown("""<p style="color:#3A485F;">Draw a digit on the canvas below and see real-time predictions</p>""", unsafe_allow_html=True)
 
 # Load the custom model
 model = load_custom_model()
 
 if model is not None:
-    # Create two equal columns with a 1:1 ratio
+    # Place the 'Interpret' and 'Download Image' buttons side by side
+    col_buttons = st.columns([1, 1])
+    with col_buttons[0]:
+        interpret_button_pressed = st.button("Interpret")
+    with col_buttons[1]:
+        download_button_pressed = False  # Initialize download button state
+
+    # Create two equal columns for Canvas and Barplot with 1:1 ratio
     col1, col2 = st.columns(2)
 
     with col1:
@@ -78,45 +113,52 @@ if model is not None:
             key="canvas"
         )
 
-        # Display prediction results below the canvas
-        if canvas_result.image_data is not None:
-            # Check if the canvas is not empty (all black)
-            if np.sum(canvas_result.image_data) > 0:
-                image_array, processed_image = process_image(canvas_result.image_data)
-                top_5_indices, top_5_confidences = predict_digit(model, image_array)
+    if canvas_result.image_data is not None:
+        # Check if the canvas is not empty (all black)
+        if np.sum(canvas_result.image_data) > 0:
+            # Process and predict the drawn image
+            image_array, processed_image = process_image(canvas_result.image_data)
+            predictions = predict_digit(model, image_array)
 
-                if top_5_indices is not None:
-                    # Display top prediction and confidence directly below the canvas
-                    st.markdown(f"""<p style="color:#3A485F;">Top Prediction: {top_5_indices[0]}</p>""", unsafe_allow_html=True)
-                    st.markdown(f"""<p style="color:#3A485F;">Confidence: {top_5_confidences[0] * 100:.2f}% </p>""", unsafe_allow_html=True)
-                    
-                    # Optionally display processed image below the canvas (you can remove this if not needed)
-                    st.image(processed_image, caption="Processed Image (244x244)", width=100)
+            if predictions is not None:
+                # Replace the existing bar plot section with Streamlit's built-in bar_chart
+                with col2:
+                    st.bar_chart(predictions)
 
-                    # Convert the processed image to bytes for downloading
-                    image_bytes = convert_image_to_bytes(processed_image)
+                # Additional details below the canvas and bar plot
+                st.markdown("### Results")
 
-                    # Download button for the processed image
-                    st.download_button(
+                # Display top prediction and confidence directly below the canvas
+                top_pred_idx = np.argmax(predictions)
+                top_class_confidence = predictions[top_pred_idx]
+                st.markdown(f"""<p style="color:#3A485F;">Top Prediction: {top_pred_idx}</p>""", unsafe_allow_html=True)
+                st.markdown(f"""<p style="color:#3A485F;">Confidence: {top_class_confidence * 100:.2f}% </p>""", unsafe_allow_html=True)
+
+                # Convert the processed image to bytes for downloading
+                image_bytes = convert_image_to_bytes(processed_image)
+
+                # Download button next to Interpret
+                with col_buttons[1]:
+                    download_button_pressed = st.download_button(
                         label="Download Image",
                         data=image_bytes,
                         file_name="drawn_digit.png",
                         mime="image/png"
                     )
-            else:
-                st.write("Please draw a digit on the canvas.")
-        else:
-            st.write("Please draw a digit on the canvas.")
 
-    with col2:
-        if top_5_indices is not None:
-            # Prepare data for the horizontal bar chart
-            prediction_data = pd.DataFrame({
-                'Prediction': top_5_indices,
-                'Confidence': top_5_confidences
-            })
+                # Display processed image below
+                st.image(processed_image, caption="Processed Image (244x244)", width=100)
 
-            # Plot top 5 predictions using Streamlit's built-in plotting function
-            st.bar_chart(prediction_data.set_index('Prediction'))
-else:
-    st.error("Failed to load the model. Please check the model path and try again.")
+                # Interpret button behavior
+                if interpret_button_pressed:
+                    # Compute saliency map
+                    try:
+                        saliency_map = compute_saliency_map(model, image_array)
+
+                        # Overlay saliency map on the processed image
+                        saliency_image = display_saliency_on_image(processed_image, saliency_map)
+
+                        # Display saliency image below the bar plot and canvas
+                        st.image(saliency_image, caption="Saliency Map", use_column_width=True)
+                    except Exception as e:
+                        st.error(f"Error generating saliency map: {str(e)}")
