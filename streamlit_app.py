@@ -57,6 +57,6 @@ number_classification = st.Page(
     icon= "📺"
 
 )
-# ----------- NAVIGATION ----------- #
+# ----------- NAVIGATION ---------- #
 pg = st.navigation(pages=[main_page, project, number_classification, about])#,contact_page 
 pg.run()
