@@ -80,10 +80,19 @@ if language == "Georgian":
     st.markdown("""<h1 style="color:#3A485F;">MNIST ციფრების კლასიფიკაცია</h1>""", unsafe_allow_html=True)
     st.markdown("""<p style="color:#3A485F;">აღნიშნული ნეირონული ქსელი ნავარჯიშებია სპეციალურად ამ პროექტისთვის შექმნილ მონაცემებზე რომელიც შედგება 500 ფოტო მონაცემისგან </p>""", unsafe_allow_html=True)
     st.markdown("""<p style="color:#3A485F;">დააგენერირეთ ციფრი ქვემოთ მოცემულ გრაფიკზე და იხილეთ პროგნოზი რეალურ დროში</p>""", unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">
+                    Interpret button გვეხმარება გავიგოთ, თუ რის მიხედვიტ ახდენს მოდელი პროგნოზირებას. 
+                    აპლიკაციაში იქმნება სპეციალურ ვიზუალურ რუკას, რომელიც გვიჩვენებს, თუ ნახატის რომელი ნაწილები იყო ყველაზე მნიშვნელოვანი მოდელის გადაწყვეტილებისთვის. 
+                    ამგვარად, შეგვიძლიათ ვნახოთ, თუ რომელ მახასიათებლებზე გაამახვილა ყურადღება მოდელმა ჩვენს მიერ დახატული ციფრის იდენტიფიცირებისას.
+                </p>
+                """, unsafe_allow_html=True)
 else:
     st.markdown("""<h1 style="color:#3A485F;">MNIST Digit Classification Web App</h1>""", unsafe_allow_html=True)
     st.markdown("""<p style="color:#3A485F;">This neural network is trained on a custom dataset of 500 images, collected specifically for this project.</p>""", unsafe_allow_html=True)
     st.markdown("""<p style="color:#3A485F;">Draw a digit on the canvas below and see real-time predictions</p>""", unsafe_allow_html=True)
+    st.markdown("""<p style="color:#3A485F;">The Interpret button helps you understand how the model makes predictions. 
+                When you click it, the app creates a special visual map that shows which parts of your drawing were most important for the model's decision. 
+                This way, you can see what features the model focused on when identifying the digit you drew.</p>""",unsafe_allow_html=True)
 
 # Load the custom model
 model = load_custom_model()
