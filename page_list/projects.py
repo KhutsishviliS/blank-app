@@ -80,7 +80,7 @@ st.code("""
         import matplotlib.pyplot as plt
 """,language="python")
 if language == "Georgian:":
-        st.markdown('<blockquote style="color:#3A485F;">TensorFlow-ს პაკეტს მოყვება ფოტო მონაცემები **fashion_mnist** და ამ მონაცემებს გამოვიყენებთ ჩვენი ხელოვნური ინტელექტის სავარჯიშოდ.</blockquote> ', unsafe_allow_html=True)
+        st.markdown('<blockquote style="color:#3A485F;">TensorFlow-ს პაკეტს მოყვება ფოტო მონაცემები <b>fashion_mnist</b> და ამ მონაცემებს გამოვიყენებთ ჩვენი ხელოვნური ინტელექტის სავარჯიშოდ.</blockquote> ', unsafe_allow_html=True)
         st.code("""
                 # fashion_mnist მონაცემთა იმპორტირება
                 fashion_mnist= tf.keras.datasets.fashion_mnist 
@@ -89,7 +89,7 @@ if language == "Georgian:":
                 (train_images,train_labels),(test_images,test_labels) = fashion_mnist.load_data()
         """,language="python")
 else:
-        st.markdown('<blockquote style="color:#3A485F;">The TensorFlow package comes with image data **fashion_mnist**, and we will use this data for training our artificial intelligence.</blockquote> ', unsafe_allow_html=True)
+        st.markdown('<blockquote style="color:#3A485F;">The TensorFlow package comes with image data <b>fashion_mnist</b>, and we will use this data for training our artificial intelligence.</blockquote> ', unsafe_allow_html=True)
         st.code("""
                 # Importing the fashion_mnist dataset
                 fashion_mnist = tf.keras.datasets.fashion_mnist 
