@@ -4,6 +4,7 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 import io
+import pandas as pd
 
 language = st.session_state.get('language', 'Georgian')
 
@@ -21,21 +22,21 @@ def process_image(image_data):
     image = Image.fromarray(image_data.astype('uint8'), 'RGBA')
     image = image.convert("RGB")  
     
-
+    # Resize image to match model input dimensions (244x244 in this case)
     image = image.resize((244, 244))
     
-    
+    # Normalize image array and reshape it for the model
     image_array = np.array(image).astype('float32') / 255.0
-    
     return image_array.reshape(1, 244, 244, 3), image
 
 def predict_digit(model, image_array):
     """ Perform the prediction on the processed image """
     try:
+        # Predict and return the top 5 predictions with their confidence
         prediction = model.predict(image_array)
-        predicted_digit = prediction.argmax(axis=1)[0]
-        confidence = prediction[0][predicted_digit]
-        return predicted_digit, confidence
+        top_5_indices = np.argsort(prediction[0])[-5:][::-1]  # Top 5 predictions
+        top_5_confidences = prediction[0][top_5_indices]
+        return top_5_indices, top_5_confidences
     except Exception as e:
         st.error(f"Error making prediction: {str(e)}")
         return None, None
@@ -60,7 +61,7 @@ else:
 model = load_custom_model()
 
 if model is not None:
-    # Drawing canvas settings
+    # Drawing canvas settings (no columns, just the canvas first)
     canvas_result = st_canvas(
         fill_color="#FFFFFF",
         stroke_width=10,
@@ -77,23 +78,34 @@ if model is not None:
         # Check if the canvas is not empty (all black)
         if np.sum(canvas_result.image_data) > 0:
             image_array, processed_image = process_image(canvas_result.image_data)
-            predicted_digit, confidence = predict_digit(model, image_array)
+            top_5_indices, top_5_confidences = predict_digit(model, image_array)
 
-            if predicted_digit is not None:
-                st.markdown(f"""<p style="color:#3A485F;">Predicted Digit: {predicted_digit}</p>""", unsafe_allow_html=True)
-                st.markdown(f"""<p style="color:#3A485F;">Confidence: {confidence * 100:.2f}% </p>""", unsafe_allow_html=True)
+            if top_5_indices is not None:
+                # Display processed image and prediction results
+                st.markdown(f"""<p style="color:#3A485F;">Top Prediction: {top_5_indices[0]}</p>""", unsafe_allow_html=True)
+                st.markdown(f"""<p style="color:#3A485F;">Confidence: {top_5_confidences[0] * 100:.2f}% </p>""", unsafe_allow_html=True)
+                
                 st.image(processed_image, caption="Processed Image (244x244)", width=100)
 
                 # Convert the processed image to bytes for downloading
                 image_bytes = convert_image_to_bytes(processed_image)
 
-                # Download button
+                # Download button for the processed image
                 st.download_button(
                     label="Download Image",
                     data=image_bytes,
                     file_name="drawn_digit.png",
                     mime="image/png"
                 )
+
+                # Prepare data for the horizontal bar chart
+                prediction_data = pd.DataFrame({
+                    'Prediction': top_5_indices,
+                    'Confidence': top_5_confidences
+                })
+
+                # Plot top 5 predictions using Streamlit's built-in plotting function
+                st.bar_chart(prediction_data.set_index('Prediction'))
         else:
             st.write("Please draw a digit on the canvas.")
     else:
