@@ -51,11 +51,7 @@ main_page = st.Page(
     icon="🤖",
     default=True
 )
-# digit_mnist = st.Page(
-#     page="page_list/mnist.py",
-#     title="MNIST Digit Classifier",
-#     icon="📚"
-# )
+
 
 number_classification = st.Page(
     page="page_list/numbers.py",
