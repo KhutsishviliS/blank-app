@@ -9,3 +9,4 @@ watchdog>=2.3.0
 pandas
 numpy
 opencv-python
+opencv-python-headless
