@@ -5,3 +5,4 @@ streamlit-option-menu
 pillow
 streamlit-drawable-canvas
 Python-IO
+watchdog>=2.3.0
