@@ -86,7 +86,7 @@ else:
     st.markdown("""<p style="color:#3A485F;">This neural network is trained on a custom dataset of 500 images, collected specifically for this project.</p>""", unsafe_allow_html=True)
     st.markdown("""<p style="color:#3A485F;">Draw a digit on the canvas below and see real-time predictions </p>""",unsafe_allow_html=True)
 
-# Load the custom model
+# Load the custom Model
 model = load_custom_model()
 
 if model is not None:
